@@ -6,10 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Activity 2: Change the image</title>
+    <script>
+      function existeUrl(url) {
+        var http = new XMLHttpRequest();
+        http.open('HEAD', url, false);
+        http.send();
+        return http.status != 404;
+      }
+
+      function comprobar(){
+        var url = document.getElementById('url').value;
+        var comprobar = existeUrl("./img/"+url);
+        var contenedor = document.getElementById('contenedor');
+        if(comprobar == true && url != ""){        
+          contenedor.innerHTML = "<img src='./img/"+url+"' width='200' height='200' alt='just an image'/>EXITO AQUI ESTA TU IMAGEN!!"
+        }else{
+          contenedor.innerHTML = "<img src='./img/default.jpg' width='300' height='200' alt='just an image'/>BUSCA OTRA..."
+        }
+      }      
+    </script>
   </head>
   <body>
     <h1>Activity 2: Change the image</h1>
-    <p>Change the following image with changed.png only if changed.png exists in the server</p>
-    <img src="./default.png" alt="just an image">
+    <p>Change the following image with changed.png only if changed.png exists in the server</p> 
+    <label for="url">Introduce el nombre y extensión del archivo: </label>
+    <input type="text" name="url" id="url">
+    <button type="buttom" value="COMPROBAR" onclick="comprobar()">COMPROBAR</button>
+    <div id="contenedor"></div> 
+
+    <hr>
+    <h4>Esta imagen se esta comprobando solo con HTML</h4>
+    <img src="./img/changed.png" onerror="this.src='./img/default.jpg'" width="200" height="200" alt="just an image"/>
   </body>
 </html>
