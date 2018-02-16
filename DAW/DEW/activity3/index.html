@@ -4,8 +4,44 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Activity 3: Forms &amp; click event</title>
+    <style type="text/css">
+      .formulario{
+        width: 40%;
+        margin: 0 auto;
+        border: 1px solid grey;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      h4{
+        text-align: center;
+      }
+      #contenedorTabla{
+        width: 70%;
+        margin: 20px auto;
+      }
+    </style>
+    <script type="text/javascript">
+      function dibujarTabla(){
+        var filas = document.getElementById('filas').value;
+        var columnas = document.getElementById('columnas').value;
+        var contenedor = document.getElementById('contenedorTabla');
+        var tabla = "<table class='table table-bordered table-striped'>";
+
+        for (let f = 0; f < filas; f++) {
+          tabla += "<tr>"
+          for (let c = 0; c < columnas; c++) {            
+            tabla += "<td align='center'>Row: "+parseInt(f+1)+", Col:"+parseInt(c+1)+"</td>"         
+          }
+          tabla += "</tr>"
+        }
+        tabla += "</table>"
+
+        contenedor.innerHTML = tabla;
+      }
+    </script>
   </head>
   <body>
     <h1>Activity 3: Forms &amp; click event</h1>
@@ -15,5 +51,26 @@
         <li>Add a table with as many rows and columns both Rows and Columns fields indicate</li>
         <li>Each table cell must contain a text like: "Row: X, Col: Y"</li>
       </ol>
+    <br>
+    <hr>
+    <br>
+    <div class="formulario">
+      <div class="form-group">
+        <label for="filas">Número de Filas</label>
+        <input type="number" class="form-control" id="filas" aria-describedby="emailHelp" placeholder="Filas" min="0">
+        <small id="filasHelp" class="form-text text-muted">Introduce el número de filas que necesites.</small>
+      </div>
+      <div class="form-group">
+        <label for="columnas">Número de Columnas</label>
+        <input type="number" class="form-control" id="columnas" placeholder="Columnas" min="0">
+        <small id="columnasHelp" class="form-text text-muted">Introduce el número de columnas que necesites.</small>
+      </div>        
+      <button type="buttom" class="btn btn-primary" onclick="dibujarTabla()">Dibujar</button>
+    </div> 
+    <br>
+    <hr>
+    <br>
+    <h4>Aqui se genera su tabla...</h4>
+    <div id="contenedorTabla"></div>
   </body>
 </html>
