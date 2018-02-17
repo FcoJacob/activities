@@ -1,6 +1,13 @@
-document.getElementById('score').innerHTML = "<h4 style='color: white;'>Score: "+0+"</h4>";
-document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
+var score = 1;
+document.getElementById('score').innerHTML = "<h4 style='color: white;'>Score: "+score+"</h4>";
+document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons' style='color: red;'>favorite</i><i class='material-icons' style='color: red;'>favorite</i><i class='material-icons' style='color: red;'>favorite</i></h4>";
+
 printStage();
+var dato;
+function borrar(dato){
+    console.log(dato);
+    dato = dato;
+}
 
 function printStage(){    
     
@@ -26,11 +33,11 @@ function printStage(){
             if(level[f][c].life == "0"){
                 result += "<div id='brick' class='brick brickDestroy'></div>"; 
             }else if(level[f][c].life == "1"){
-                result += "<div id='brick' class='brick levelBrickOne'></div>"; 
+                result += "<div id='brick' class='brick levelBrickOne' onclick='borrar(this)'></div>"; 
             }else if(level[f][c].life == "2"){
-                result += "<div id='brick' class='brick levelBrickTwo'></div>"; 
+                result += "<div id='brick' class='brick levelBrickTwo' onclick='borrar(this)'></div>"; 
             }else if(level[f][c].life == "3"){
-                result += "<div id='brick' class='brick levelBrickThree'></div>"; 
+                result += "<div id='brick' class='brick levelBrickThree' onclick='borrar(this)'></div>"; 
             }                       
         } 
         result += "</div>";       
@@ -68,50 +75,13 @@ function printStage(){
     var x=0;
     var controlY=1;  
     var controlX=1;  
-    var velocidad=3;    
+    var velocidad=1;    
     var lifes = 3;
+    score++;    
     var movimiento = setInterval(function mover(){        
             var ventana_ancho = $(window).width();
             var ventana_alto = $(window).height();
-            //Eje Y
-            if(controlY==1){ 
-                y+=velocidad;
-            }else{         
-                y-=velocidad;
-            }
-            if(y<=0){
-                controlY=1;
-                y=0;
-            }else if(y >= ventana_alto-30){ 
-            // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la imagen
-                lifes--;
-                if(lifes >= 3){
-                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
-                }else if(lifes == 2){
-                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite_border</i></h4>";
-                }else if(lifes == 1){
-                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
-                }else if(lifes == 0){                
-                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
-                }else{  
-                    var restarLife = confirm('GAME OVER!!! \n ¿Deseas volver a jugar?'); 
-                    if(restarLife){
-                        lifes = 3;
-                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
-                        velocidad = 3;
-                    }else if(!restarLife){                                      
-                        lifes = 0;
-                        velocidad = 0;
-                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
-                        location.href = "./";  
-                        alert('Hasta Pronto!!');
-                        clearInterval(movimiento);                                                                        
-                    }
-                    
-                }  
-                controlY = 0;
-                y = ventana_alto-30;
-            }
+            var paddle = document.getElementById('player').getBoundingClientRect();
             
             //Eje X
             if(controlX==1){ 
@@ -126,13 +96,74 @@ function printStage(){
                 controlX=0;
                 x = ventana_ancho-30;
             }
-            
+
+            //Eje Y
+            if(controlY==1){ 
+                y+=velocidad;
+            }else{         
+                y-=velocidad;
+            }
+            if(y<=0){
+                controlY=1;
+                y=0;
+            }else if(y >= ventana_alto-paddle.height){ 
+            // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la imagen                  
+                if(x > paddle.x && x < paddle.x + paddle.width) {
+                    // console.log(paddle.top+", = "+y); 
+                    y = (y-paddle.height)-30; 
+                    controlY = 0;                   
+                     
+                }else {
+                    
+                    lifes--;
+                    if(lifes >= 3){
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons' style='color: red;'>favorite</i><i class='material-icons' style='color: red;'>favorite</i><i class='material-icons' style='color: red;'>favorite</i></h4>";
+                    }else if(lifes == 2){
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons' style='color: red;'>favorite</i><i class='material-icons' style='color: red;'>favorite</i><i class='material-icons'>favorite_border</i></h4>";
+                    }else if(lifes == 1){
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons' style='color: red;'>favorite</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                    }else if(lifes == 0){                
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                    }else{  
+                        var restarLife = confirm('GAME OVER!!! \n ¿Deseas volver a jugar?'); 
+                        if(restarLife){
+                            lifes = 3;
+                            document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
+                            velocidad = 3;
+                        }else if(!restarLife){                                      
+                            lifes = 0;
+                            velocidad = 0;
+                            document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                            location.href = "./";  
+                            alert('Hasta Pronto!!');
+                            clearInterval(movimiento);                                                                        
+                        }                    
+                    } 
+                    y = ventana_alto-30;   
+                    controlY = 0;                 
+                    
+                }                                 
+                                 
+            }              //Golpe en la pala
             document.getElementById("ball").style.left=String(x)+"px";
             document.getElementById("ball").style.top=String(y)+"px";
+
+            $('.brick').removeClass('hightlight');
+            $('.row').each(function () {
+                var bounds = this.getBoundingClientRect();
+                if (bounds.bottom >= y && bounds.top <= y) {
+                $(this).children('.brick').each(function () {
+                    var bounds = this.getBoundingClientRect();
+                    if (bounds.left <= x && bounds.right >= x) {
+                    $(this).addClass('brickDestroy');
+                        
+                        controlY = 0;
+                        y = y-30;
+                    }
+                });
+                }
+            });
             
             
-        },6);    
-
-
-      
+        },1);   
 }
