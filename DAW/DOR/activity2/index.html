@@ -8,50 +8,47 @@
     <title>Activity 2: CSS positioning</title>
     <!-- please, don't touch this styles -->
     <style>
-     #third_block_container{
-       border: 1px solid #000;
-       height: 500px;
-     }
-    </style>
-    <style>
-      #first_block {
+      #container{
+        position:relative;
+        border: 1px solid #000;
+        height: 500px;
+      }
+
+      #first_block{
         width: 100px;
         height: 50px;
         background: red;
-        position: absolute;
         top: 0;
         right: 0;
+        position: fixed;
         overflow: hidden;
       }
 
-      #second_block {
+      #second_block{
         width: 100px;
         height: 50px;
         background: blue;
-        position: absolute;
         top: 0;
         left: 0;
-        overflow: scroll;
-      }
-      
-      #container{
-        width: 100%;
-        position: relative;
-        display: inline-flex;
+        position: fixed;
+        overflow: auto;
       }
 
       .third_block{
-        width: 50vw;        
+        width: 50%;
         background: grey;
+        bottom:0;
+        left:0;
         position: absolute;
-        bottom: 0;
-        left: 0;        
       }
-
+     
       .fourth_block{
-        width: 50vw;        
-        background: pink;               
+        width: 50%;
+        background: pink;
       }
+    </style>
+    <!-- Your styles here -->
+    <style>
     </style>
   </head>
   <body>
@@ -62,7 +59,7 @@
     <div id="container">
       I'm containing some blocks
       <div class="third_block"><ul><li>width 50%</li><li>background: grey</li><li>Position: on the bottom left corner on the container (container) div</li></ul></div>
-      <div class="fourth_block"><ul><li>width 49%</li><li>background: pink</li></ul></div>
+      <div class="fourth_block"><ul><li>width 50%</li><li>background: pink</li></ul></div>
     </div>
   </body>
 </html>
