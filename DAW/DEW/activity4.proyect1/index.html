@@ -4,10 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Activity 4: Arkanoid</title>
     <style>
-
       .row{
         display: flex;
         width: 100%;
@@ -22,7 +22,17 @@
       .hightlight{
         background-color: yellow;
       }
+      .button{
+        margin: 50px auto;
+        text-align: center;
+      }
+      
     </style>
+    <script type="text/javascript">
+      function comenzar(){
+        location.href = "arkanoid.html";
+      }
+    </script>
   </head>
   <body>
     <h1>Activity 4: Arkanoid</h1>
@@ -44,34 +54,37 @@
         <li>(1.5 points) Make the ball interact with the vaus</li>
         <li>(3.5 points) Make the ball collide with the bricks, each time the ball hits a brick it might change direction and the brick reduces 1 life. The brick dissapears (preserving the space it occupies) when it get to 0 lifes.</li>
       </ul>
+      <br>
+      <hr>
       <h2>Guiding code:</h2>
       <div class="stage">
         <div class="row"><div class="brick"></div><div class="brick"></div><div class="brick"></div></div>
         <div class="row"><div class="brick"></div><div class="brick"></div><div class="brick"></div></div>
       </div>
-
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+      <div class="button">
+        <button  class="btn btn-danger btn-lg" type="buttom" onclick="comenzar()">Iniciar Arkanoid</button>
+      </div>      
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>      
       <script>
-      document.onmousemove = handleMouseMove;
-      var intro;
-      function handleMouseMove(event) {
+        document.onmousemove = handleMouseMove;
+        var intro;
+        function handleMouseMove(event) {
           var x = event.clientX;
           var y = event.clientY;
+          // console.log(x+", "+y)
           $('.brick').removeClass('hightlight');
-          $('.row').each(function(){
+          $('.row').each(function () {
             var bounds = this.getBoundingClientRect();
-            if (bounds.bottom >= y && bounds.top <= y){
-              $(this).children('.brick').each(function(){
+            if (bounds.bottom >= y && bounds.top <= y) {
+              $(this).children('.brick').each(function () {
                 var bounds = this.getBoundingClientRect();
-                if (bounds.left <= x && bounds.right >= x){
+                if (bounds.left <= x && bounds.right >= x) {
                   $(this).addClass('hightlight');
                 }
               })
-
             }
           })
-
-      }
+        }
       </script>
 
   </body>

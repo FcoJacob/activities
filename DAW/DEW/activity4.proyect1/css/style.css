@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;    
+}
+
+html {
+    overflow: hidden; 
+}
+
+body {
+    background-color: darkslategrey;
+    overflow: hidden;
+}
+
+#tablero {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-image: url("../img/espacio.png");
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.drawerBricks {
+    width: 95%;
+    height: 30vh;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.brick {
+    margin: 0 auto;
+    width: 80px;
+    height: 24px;
+    position: relative;
+    flex-basis: auto;
+    text-align: center;
+    border: 0.5px solid black;
+}
+
+.brickDestroy {
+    visibility: hidden;
+}
+
+.levelBrickOne {
+    background-image: url("../img/brick1.png");
+    background-size: cover;
+}
+
+.levelBrickTwo {
+    background-image: url("../img/brick2.png");
+    background-size: cover;
+}
+
+.levelBrickThree {
+    background-image: url("../img/brick3.png");
+    background-size: cover;
+}
+
+.ball {
+    top: calc(92.2% - 15px);
+    left: calc(50% - 15px);;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgb(253, 215, 0), rgb(165, 140, 0), rgb(110, 94, 0));
+    -webkit-box-shadow: 0px 0px 5px 0 #7D7D7D;
+    box-shadow: 0px 0px 5px 0 rgb(41, 40, 40);
+    border: 0.5px solid rgb(99, 98, 98);
+    border-radius: 25px;
+    position: absolute;
+}
+
+.player {
+    bottom: calc(50px - 15px);
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 30px;
+    position: relative;
+    background-image: url("../img/player.png");
+    background-size: cover;
+    position: absolute;
+}
+
+.hightlight{
+    background-color: yellow;
+}
