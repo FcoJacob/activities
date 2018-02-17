@@ -92,3 +92,18 @@ body {
 .hightlight{
     background-color: yellow;
 }
+
+.score {
+    margin-top: 20px;
+    margin-left: 10px;
+    text-align: left;    
+    position: fixed;
+}
+
+.life {
+    margin-top: 20px;
+    margin-right: 10px;
+    right: 0px;  
+    text-align: right;  
+    position: fixed;
+}

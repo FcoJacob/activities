@@ -1,7 +1,9 @@
+document.getElementById('score').innerHTML = "<h4 style='color: white;'>Score: "+0+"</h4>";
+document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
 printStage();
 
-function printStage(){
-
+function printStage(){    
+    
     var contenedor = document.getElementById('drawerBricks');
     var result = "<div>";
     var level = [
@@ -66,7 +68,7 @@ function printStage(){
     var x=0;
     var controlY=1;  
     var controlX=1;  
-    var velocidad=2;    
+    var velocidad=3;    
 
     setInterval(function mover(){
         var ventana_ancho = $(window).width();
@@ -100,11 +102,39 @@ function printStage(){
             controlX=0;
             x = ventana_ancho-30;
         }
+        /*
+        var ball = document.getElementById("ball").getBoundingClientRect();
+        var drawerBricks = document.getElementById("drawerBricks").getBoundingClientRect();
+        var player = document.getElementById("player").getBoundingClientRect();
+
+        if(ball.bottom == player.top || ball.left == player.right || ball.right == player.left){
+            if(ball.bottom == player.top){
+                controlY = 0;            
+                controlX=0;
+                y = ventana_alto-30;
+                x = ventana_ancho-30;                 
+            }
+            if(ball.left == player.right){
+                console.log('choco derecha');
+                controlY = 0;            
+                controlX=0;
+                y = ventana_alto-30;
+                x = ventana_ancho-30;                
+            }
+            if(ball.right == player.left){
+                controlY = 0;            
+                controlX=0;
+                y = ventana_alto-30;
+                x = ventana_ancho-30;                 
+            }           
+        }
+        */
         document.getElementById("ball").style.left=String(x)+"px";
         document.getElementById("ball").style.top=String(y)+"px";
+         
+        
     },6);    
 
-    
-    
-    
+
+      
 }
