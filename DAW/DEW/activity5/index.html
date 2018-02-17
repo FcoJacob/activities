@@ -6,16 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Activity 5: the audio tag + events</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+      * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      .controls {
+        margin-left: 55px;
+      }
+
       .controls div{
         float: left;
         margin: 10px;
-        border: 3px solid #000;
+        border: 3px solid rgb(90, 90, 90);
+        color: rgb(90, 90, 90);
         font-size: 2em;
         text-align: center;
         width: 50px;
+        border-radius: 20px;
+      }
+
+      #lista li:hover{
+        width: 25%;
         border-radius: 5px;
+        padding-left: 10px;
+        background: rgb(170, 170, 170);
+        color: white;
+        cursor: pointer;
+      }
+
+      .controls div:hover{        
+        border: 3px solid #fff;
+        background: rgb(90, 90, 90);
+        color: white;
+        cursor: pointer;
+      }
+
+      .timeControl{
+        width: 25%;
+        margin: 80px 0 0 -30px;
+        position: absolute;
+        text-align: center;
+      }
+
+      .timeControl label{
+        font-weight: 500;
+        color: rgb(90, 90, 90);
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -28,19 +74,98 @@
       <li>When 1 audio ends the following one must estart playing automatically</li>
     </ul>
 
-    <ol>
-      <li>music1.mp3</li>
-      <li>music2.mp3</li>
-      <li>music3.mp3</li>
+    <ol id="lista">
+      <li id="cancion1">Pearl Harbor.mp3</li>
+      <li id="cancion2">E.T.mp3</li>
+      <li id="cancion3">Aerosmith I dont wanna miss a thing -Armageddon.mp3</li>
     </ol>
-    <audio>
-     <source src="" type="audio/mpeg">
-     Your browser does not support the audio tag.
+    <audio id="audio" src="./audio/Pearl Harbor.mp3">
+      Your browser does not support the <code>audio</code> element.
     </audio>
     <div class="controls">
-      <div class="play"><i class="fa fa-play"></i></div>
-      <div class="backward"><i class="fa fa-step-backward"></i></div>
-      <div class="fordward"><i class="fa fa-step-forward"></i></div>
+      <div class="backward"><i class="material-icons">fast_rewind</i></div>
+      <div class="play"><i class="material-icons">play_arrow</i></div>
+      <div class="pause"><i class="material-icons">pause</i></div>  
+      <div class="fordward"><i class="material-icons">fast_forward</i></div>
     </div>
+    <div class="row timeControl">
+      <div class="col">
+        <label for="tiempoTotal">Duración: </label>
+        <p id="tiempoTotal"></p>
+      </div>
+      <div class="col">
+        <label for="tiempoRestante">Tiempo transcurrido: </label>
+        <p id="tiempoRestante"></p>
+      </div>      
+    </div>
+    <script src="./js/jquery-3.2.1.min.js" crossorigin="anonymous"></script> 
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        function formatTime(seconds) {
+          minutes = Math.floor(seconds / 60);
+          minutes = (minutes >= 10) ? minutes : "0" + minutes;
+          seconds = Math.floor(seconds % 60);
+          seconds = (seconds >= 10) ? seconds : "0" + seconds;
+          return minutes + ":" + seconds;
+        }
+
+        $("#cancion1").click(function(){
+          url = $("#cancion1").text();
+          $("#audio").attr("src", "./audio/"+url);
+        });
+
+        $("#cancion2").click(function(){
+          url = $("#cancion2").text();
+          $("#audio").attr("src", "./audio/"+url);
+        });
+
+        $("#cancion3").click(function(){
+          url = $("#cancion3").text();
+          $("#audio").attr("src", "./audio/"+url);
+        });
+
+        var audio = document.getElementById("audio");
+        $(".play").click(function(){                   
+          audio.play(); 
+          document.getElementById('tiempoTotal').innerHTML = formatTime(audio.duration);
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);        
+        });        
+
+        $(".pause").click(function(){                   
+          audio.pause();
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
+        });
+        
+        $(".backward").click(function(){                   
+          audio.currentTime -= 10;
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
+        });
+
+        $(".fordward").click(function(){                   
+          audio.currentTime += 10;
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
+        });
+
+        setInterval(function(){          
+          if(audio.ended == true){
+            //console.log(audio.currentSrc)
+            if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/Pearl%Harbor.mp3"){
+              $("#audio").attr("src", "./audio/E.T.mp3");              
+              audio.play();              
+            }else if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/E.T.mp3"){
+              $("#audio").attr("src", "./audio/Aerosmith I dont wanna miss a thing -Armageddon.mp3");              
+              audio.play();              
+            }else if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/Aerosmith%20I%20dont%20wanna%20miss%20a%20thing%20-Armageddon.mp3"){
+              $("#audio").attr("src", "./audio/Pearl Harbor.mp3");              
+              audio.play();              
+            }            
+          }
+          document.getElementById('tiempoTotal').innerHTML = formatTime(audio.duration);
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);    
+        },1);        
+                   
+      });      
+    </script>
   </body>
 </html>
