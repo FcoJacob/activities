@@ -37,16 +37,18 @@ function printStage(){
 
     contenedor.innerHTML = result;  
     
-    window.onmousemove = handleMouseMove;
-    //var intro;
+    // movimientos
 
+    window.onmousemove = handleMouseMove;     
+    
     function handleMouseMove(event) {
         var x = event.clientX;
-        var y = event.clientY;
+        var y = event.clientY;        
         var ventana_ancho = $(window).width();
         var ventana_alto = $(window).height();
-        
+
         $(document).ready(function(){
+            //moviendo al jugador
             $(window).mousemove(function(event){                
                 if(event.clientX >= ventana_ancho-100){
                     $(".player").css("left", ventana_ancho - 200);
@@ -55,28 +57,54 @@ function printStage(){
                 }else{
                     $(".player").css("left", event.clientX - 100);  
                 }                
-            });
-        });
-
-        //console.log(x+", "+y)
-        $('#brick').removeClass('hightlight');
-        $('.row').each(function () {
-
-            var bounds = this.getBoundingClientRect();
-
-            if (bounds.bottom >= y && bounds.top <= y) {
-
-                $(this).children('.brick').each(function () {
-
-                    var bounds = this.getBoundingClientRect();
-                    if (bounds.left <= x && bounds.right >= x) {                        
-                        $(this).addClass('hightlight');
-                    }
-
-                });
-            
-            }
-
-        });
+            });            
+        });      
     }
+
+    //Definimos las variables:
+    var y=0;           
+    var x=0;
+    var controlY=1;  
+    var controlX=1;  
+    var velocidad=2;    
+
+    setInterval(function mover(){
+        var ventana_ancho = $(window).width();
+        var ventana_alto = $(window).height();
+        //Eje Y
+        if(controlY==1){ 
+            y+=velocidad;
+        }else{         
+            y-=velocidad;
+        }
+        if(y<=0){
+            controlY=1;
+            y=0;
+        }else if(y >= ventana_alto-30){ 
+        // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la imagen
+
+            controlY = 0;
+            y = ventana_alto-30;
+        }
+
+        //Eje X
+        if(controlX==1){ 
+            x+=velocidad;
+        }else{         
+            x-=velocidad;
+        }
+        if(x<=0){
+            controlX=1;
+            x=0;
+        }else if(x >= ventana_ancho-30){
+            controlX=0;
+            x = ventana_ancho-30;
+        }
+        document.getElementById("ball").style.left=String(x)+"px";
+        document.getElementById("ball").style.top=String(y)+"px";
+    },6);    
+
+    
+    
+    
 }
