@@ -13,8 +13,45 @@
        height: 500px;
      }
     </style>
-    <!-- Your styles here -->
     <style>
+      #first_block {
+        width: 100px;
+        height: 50px;
+        background: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      #second_block {
+        width: 100px;
+        height: 50px;
+        background: blue;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: scroll;
+      }
+      
+      #container{
+        width: 100%;
+        position: relative;
+        display: inline-flex;
+      }
+
+      .third_block{
+        width: 50vw;        
+        background: grey;
+        position: absolute;
+        bottom: 0;
+        left: 0;        
+      }
+
+      .fourth_block{
+        width: 50vw;        
+        background: pink;               
+      }
     </style>
   </head>
   <body>
@@ -25,7 +62,7 @@
     <div id="container">
       I'm containing some blocks
       <div class="third_block"><ul><li>width 50%</li><li>background: grey</li><li>Position: on the bottom left corner on the container (container) div</li></ul></div>
-      <div class="fourth_block"><ul><li>width 50%</li><li>background: pink</li></ul></div>
+      <div class="fourth_block"><ul><li>width 49%</li><li>background: pink</li></ul></div>
     </div>
   </body>
 </html>
