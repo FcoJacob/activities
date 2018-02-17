@@ -69,71 +69,69 @@ function printStage(){
     var controlY=1;  
     var controlX=1;  
     var velocidad=3;    
-
-    setInterval(function mover(){
-        var ventana_ancho = $(window).width();
-        var ventana_alto = $(window).height();
-        //Eje Y
-        if(controlY==1){ 
-            y+=velocidad;
-        }else{         
-            y-=velocidad;
-        }
-        if(y<=0){
-            controlY=1;
-            y=0;
-        }else if(y >= ventana_alto-30){ 
-        // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la imagen
-
-            controlY = 0;
-            y = ventana_alto-30;
-        }
-
-        //Eje X
-        if(controlX==1){ 
-            x+=velocidad;
-        }else{         
-            x-=velocidad;
-        }
-        if(x<=0){
-            controlX=1;
-            x=0;
-        }else if(x >= ventana_ancho-30){
-            controlX=0;
-            x = ventana_ancho-30;
-        }
-        /*
-        var ball = document.getElementById("ball").getBoundingClientRect();
-        var drawerBricks = document.getElementById("drawerBricks").getBoundingClientRect();
-        var player = document.getElementById("player").getBoundingClientRect();
-
-        if(ball.bottom == player.top || ball.left == player.right || ball.right == player.left){
-            if(ball.bottom == player.top){
-                controlY = 0;            
-                controlX=0;
-                y = ventana_alto-30;
-                x = ventana_ancho-30;                 
+    var lifes = 3;
+    var movimiento = setInterval(function mover(){        
+            var ventana_ancho = $(window).width();
+            var ventana_alto = $(window).height();
+            //Eje Y
+            if(controlY==1){ 
+                y+=velocidad;
+            }else{         
+                y-=velocidad;
             }
-            if(ball.left == player.right){
-                console.log('choco derecha');
-                controlY = 0;            
-                controlX=0;
+            if(y<=0){
+                controlY=1;
+                y=0;
+            }else if(y >= ventana_alto-30){ 
+            // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la imagen
+                lifes--;
+                if(lifes >= 3){
+                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
+                }else if(lifes == 2){
+                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite_border</i></h4>";
+                }else if(lifes == 1){
+                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                }else if(lifes == 0){                
+                    document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                }else{  
+                    var restarLife = confirm('GAME OVER!!! \n ¿Deseas volver a jugar?'); 
+                    if(restarLife){
+                        lifes = 3;
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite</i><i class='material-icons'>favorite</i><i class='material-icons'>favorite</i></h4>";
+                        velocidad = 3;
+                    }else if(!restarLife){                                      
+                        lifes = 0;
+                        velocidad = 0;
+                        document.getElementById('life').innerHTML = "<h4 style='color: white;'>Life: <i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i><i class='material-icons'>favorite_border</i></h4>";
+                        location.href = "./";  
+                        alert('Hasta Pronto!!');
+                        clearInterval(movimiento);                                                                        
+                    }
+                    
+                }  
+                controlY = 0;
                 y = ventana_alto-30;
-                x = ventana_ancho-30;                
             }
-            if(ball.right == player.left){
-                controlY = 0;            
+            
+            //Eje X
+            if(controlX==1){ 
+                x+=velocidad;
+            }else{         
+                x-=velocidad;
+            }
+            if(x<=0){
+                controlX=1;
+                x=0;
+            }else if(x >= ventana_ancho-30){
                 controlX=0;
-                y = ventana_alto-30;
-                x = ventana_ancho-30;                 
-            }           
-        }
-        */
-        document.getElementById("ball").style.left=String(x)+"px";
-        document.getElementById("ball").style.top=String(y)+"px";
-         
-        
-    },6);    
+                x = ventana_ancho-30;
+            }
+            
+            document.getElementById("ball").style.left=String(x)+"px";
+            document.getElementById("ball").style.top=String(y)+"px";
+            
+            
+        },6);    
 
 
       

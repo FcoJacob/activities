@@ -9,10 +9,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Activity 2: Responsive design</title>
+    <style>
+      main {
+        background: red;
+        height: 250px; 
+        display: flex;       
+      }
+      
+      footer {
+        width: 100%;
+        height: 20vh;
+        bottom: 0;
+        position: absolute;
+        background: grey;
+      }
+
+      #blue {
+        background: blue;
+        height: 250px;        
+      }
+    </style>
   </head>
   <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">DOR activity4</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -20,30 +40,21 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Option 1<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">Option 2</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
+                  Option 3
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Option 3.1</a>
+                  <a class="dropdown-item" href="#">Option 3.2</a>                  
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+              </li>              
+            </ul>            
           </div>
         </nav>
     <h1>Activity 2: Responsive design</h1>
@@ -61,6 +72,18 @@
       <li>A grey backgound footer space full width
       </li>
     </ul>
+      <main class="row">          
+          <div class="col-8 col-sm-12">
+              
+          </div> 
+          <div id="blue" class="col-4 col-sm-12">
+              
+          </div>                 
+      </main>      
+      <footer>
+
+      </footer>
+      
 
     <!-- Your code here -->
 
