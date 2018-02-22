@@ -162,36 +162,63 @@ function printStage(){
             
             $('.row').each(function () {                                                                //por filas en la tabla
                 var bounds = this.getBoundingClientRect();                                              //bordes y dimensiones de la fila
-                if (y <= bounds.top && y >= bounds.bottom) {                                            //si esta dentró de la fila
-                    $(this).children('.brick').each(function () {                                       //miramos por cada bloque hijo de esa fila
+                if (y >= bounds.top && y <= bounds.bottom) {                                            //si esta dentró de la fila
+                    $(this).children('.brick:not(.brickDestroy)').each(function () {                                                               //miramos por cada bloque hijo de esa fila
                         var bounds = this.getBoundingClientRect();                                      //bordes y dimensiones del bloque
                         var ball = document.getElementById('ball').getBoundingClientRect();             //bordes y dimensiones de la bola
                         if (bounds.left <= ball.left && bounds.right >= ball.right ) {                  //esta dentro de su espacio (width)
-                                            
+                             
                             if(bounds.top <= ball.bottom){                                              //choco la bola por encima
-                                console.log('choco arriba');
-                                $(this).addClass('brickDestroy');                        
-                                controlY = 0;
-                                y = y-15; 
-                            }else if(bounds.bottom <= ball.top){                                        //choco la bola por abajo
-                                console.log('choco abajo');
-                                $(this).addClass('brickDestroy');                        
-                                controlY = 0;
-                                y = y-15;
-                            }
-                            
-                        }else if(bounds.top <= ball.top && bounds.bottom >= ball.bottom){               //esta dentro de su espacio (height)
-                            
+                                                               
+                                if($(this).attr('class') == "brick levelBrickOne"){
+                                    $(this).removeClass('levelBrickOne');
+                                    $(this).addClass('brickDestroy');                                     
+                                }else if($(this).attr('class') == "brick levelBrickTwo"){
+                                    $(this).removeClass('levelBrickTwo');
+                                    $(this).addClass('levelBrickOne'); 
+                                }else if($(this).attr('class') == "brick levelBrickThree"){
+                                    $(this).removeClass('levelBrickThree');
+                                    $(this).addClass('levelBrickTwo'); 
+                                }                                                       
+                                controlY = 1;                                
+                            }else if(bounds.bottom >= ball.top){                                              //choco la bola por abajo
+                                if($(this).attr('class') == "brick levelBrickOne"){
+                                    $(this).removeClass('levelBrickOne');
+                                    $(this).addClass('brickDestroy');                                     
+                                }else if($(this).attr('class') == "brick levelBrickTwo"){
+                                    $(this).removeClass('levelBrickTwo');
+                                    $(this).addClass('levelBrickOne'); 
+                                }else if($(this).attr('class') == "brick levelBrickThree"){
+                                    $(this).removeClass('levelBrickThree');
+                                    $(this).addClass('levelBrickTwo'); 
+                                }                         
+                                controlY = 0;                                
+                            } 
+
                             if(bounds.right <= ball.left){                                              //choco la bola por la derecha
-                                console.log('choco derecha');
-                                $(this).addClass('brickDestroy');                        
-                                controlY = 0;
-                                y = y-15; 
+                                if($(this).attr('class') == "brick levelBrickOne"){
+                                    $(this).removeClass('levelBrickOne');
+                                    $(this).addClass('brickDestroy');                                     
+                                }else if($(this).attr('class') == "brick levelBrickTwo"){
+                                    $(this).removeClass('levelBrickTwo');
+                                    $(this).addClass('levelBrickOne'); 
+                                }else if($(this).attr('class') == "brick levelBrickThree"){
+                                    $(this).removeClass('levelBrickThree');
+                                    $(this).addClass('levelBrickTwo'); 
+                                }                        
+                                controlX = 1;                                
                             }else if(bounds.left <= ball.right){                                        //choco la bola por la izquierda
-                                console.log('choco izquierda');
-                                $(this).addClass('brickDestroy');                        
-                                controlY = 0;
-                                y = y-15;
+                                if($(this).attr('class') == "brick levelBrickOne"){
+                                    $(this).removeClass('levelBrickOne');
+                                    $(this).addClass('brickDestroy');                                     
+                                }else if($(this).attr('class') == "brick levelBrickTwo"){
+                                    $(this).removeClass('levelBrickTwo');
+                                    $(this).addClass('levelBrickOne'); 
+                                }else if($(this).attr('class') == "brick levelBrickThree"){
+                                    $(this).removeClass('levelBrickThree');
+                                    $(this).addClass('levelBrickTwo'); 
+                                }                        
+                                controlX = 0;                                
                             }
 
                         }
