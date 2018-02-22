@@ -1,11 +1,11 @@
 * {
     margin: 0;
     padding: 0;
-    overflow: hidden;    
+    overflow: hidden;        
 }
 
 html {
-    overflow: hidden; 
+    overflow: hidden;     
 }
 
 body {
@@ -19,7 +19,8 @@ body {
     position: absolute;
     background-image: url("../img/espacio.png");
     border-radius: 5px;
-    overflow: hidden;
+    overflow: hidden; 
+    cursor: none;  
 }
 
 .drawerBricks {
@@ -41,6 +42,7 @@ body {
     width: 80px;
     height: 24px;
     position: relative;
+    display: flex;
     flex-basis: auto;
     text-align: center;
     border: 0.5px solid black;
@@ -66,8 +68,8 @@ body {
 }
 
 .ball {
-    top: 90.5%;
-    left: 50%;
+    top: calc(90.5% - 15px);
+    left: calc(50% - 15px);
     width: 30px;
     height: 30px;
     background: radial-gradient(circle, rgb(253, 215, 0), rgb(165, 140, 0), rgb(110, 94, 0));
