@@ -75,9 +75,9 @@
     </ul>
 
     <ol id="lista">
-      <li id="cancion1">Pearl Harbor.mp3</li>
-      <li id="cancion2">E.T.mp3</li>
-      <li id="cancion3">Aerosmith I dont wanna miss a thing -Armageddon.mp3</li>
+      <li id="cancion1" alt="PearlHarbor.mp3">Pearl Harbor.mp3</li>
+      <li id="cancion2" alt="E.T.mp3">E.T.mp3</li>
+      <li id="cancion3" alt="AerosmithIdontwannamissathing-Armageddon.mp3">Aerosmith I dont wanna miss a thing -Armageddon.mp3</li>
     </ol>
     <audio id="audio" src="./audio/PearlHarbor.mp3">
       Your browser does not support the <code>audio</code> element.
@@ -117,18 +117,8 @@
           return minutes + ":" + seconds;
         }
 
-        $("#cancion1").click(function(){
-          url = $("#cancion1").text();
-          $("#audio").attr("src", "./audio/"+url);
-        });
-
-        $("#cancion2").click(function(){
-          url = $("#cancion2").text();
-          $("#audio").attr("src", "./audio/"+url);
-        });
-
-        $("#cancion3").click(function(){
-          url = $("#cancion3").text();
+        $('#lista').on('click', 'li', function(){
+          url = $(this).attr("alt");
           $("#audio").attr("src", "./audio/"+url);
         });
 
