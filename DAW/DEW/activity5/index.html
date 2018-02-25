@@ -21,7 +21,7 @@
       }
 
       .controls {
-        margin-left: 55px;
+        margin-left: 15px;
       }
 
       .controls div{
@@ -36,7 +36,7 @@
       }
 
       #lista li:hover{
-        width: 25%;
+        width: 40%;
         border-radius: 5px;
         padding-left: 10px;
         background: rgb(170, 170, 170);
@@ -52,8 +52,8 @@
       }
 
       .timeControl{
-        width: 25%;
-        margin: 80px 0 0 -30px;
+        width: 45%;
+        margin: 80px 0 0 -35px;
         position: absolute;
         text-align: center;
       }
@@ -79,24 +79,31 @@
       <li id="cancion2">E.T.mp3</li>
       <li id="cancion3">Aerosmith I dont wanna miss a thing -Armageddon.mp3</li>
     </ol>
-    <audio id="audio" src="./audio/Pearl Harbor.mp3">
+    <audio id="audio" src="./audio/PearlHarbor.mp3">
       Your browser does not support the <code>audio</code> element.
     </audio>
-    <div class="controls">
+    <div class="controls">    
+      <div class="stop"><i class="material-icons">stop</i></div>
       <div class="backward"><i class="material-icons">fast_rewind</i></div>
+      <div class="changedBack"><i class="material-icons">skip_previous</i></div>  
+      <div class="pause"><i class="material-icons">pause</i></div>
       <div class="play"><i class="material-icons">play_arrow</i></div>
-      <div class="pause"><i class="material-icons">pause</i></div>  
-      <div class="fordward"><i class="material-icons">fast_forward</i></div>
+      <div class="changedForward"><i class="material-icons">skip_next</i></div>
+      <div class="fordward"><i class="material-icons">fast_forward</i></div>      
     </div>
     <div class="row timeControl">
       <div class="col">
-        <label for="tiempoTotal">Duración: </label>
+        <label for="tiempoTotal">Duración </label>
         <p id="tiempoTotal"></p>
       </div>
       <div class="col">
-        <label for="tiempoRestante">Tiempo transcurrido: </label>
+        <label for="tiempoTranscurrido">Tiempo transcurrido </label>
+        <p id="tiempoTranscurrido"></p>
+      </div>
+      <div class="col">
+        <label for="tiempoRestante">Tiempo restante </label>
         <p id="tiempoRestante"></p>
-      </div>      
+      </div>       
     </div>
     <script src="./js/jquery-3.2.1.min.js" crossorigin="anonymous"></script> 
     <script type="text/javascript">
@@ -150,20 +157,21 @@
         setInterval(function(){          
           if(audio.ended == true){
             //console.log(audio.currentSrc)
-            if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/Pearl%Harbor.mp3"){
+            if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/PearlHarbor.mp3"){
               $("#audio").attr("src", "./audio/E.T.mp3");              
               audio.play();              
             }else if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/E.T.mp3"){
-              $("#audio").attr("src", "./audio/Aerosmith I dont wanna miss a thing -Armageddon.mp3");              
+              $("#audio").attr("src", "./audio/AerosmithIdontwannamissathing-Armageddon.mp3");              
               audio.play();              
-            }else if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/Aerosmith%20I%20dont%20wanna%20miss%20a%20thing%20-Armageddon.mp3"){
-              $("#audio").attr("src", "./audio/Pearl Harbor.mp3");              
+            }else if(audio.currentSrc == "http://localhost/activities/DAW/DEW/activity5/audio/AerosmithIdontwannamissathing-Armageddon.mp3"){
+              $("#audio").attr("src", "./audio/PearlHarbor.mp3");              
               audio.play();              
             }            
           }
           document.getElementById('tiempoTotal').innerHTML = formatTime(audio.duration);
-          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);    
-        },1);        
+          document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime); 
+          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime);    
+        },10);        
                    
       });      
     </script>
