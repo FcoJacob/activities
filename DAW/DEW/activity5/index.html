@@ -66,7 +66,7 @@
       }
 
       #master{
-        width: 260px;
+        width: 175px;
         margin: -50px 0 0 525px;
         position: absolute;
       }
@@ -101,14 +101,15 @@
       <div class="fordward"><i class="material-icons">fast_forward</i></div>           
     </div>
     <div class="volumen">
-      <p>
-        <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
-          <span style="float:left; margin:0px 5px 0 0;"><i class="material-icons">volume_mute</i></span>
-          Volumen: 
-          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;background: transparent;">
-        </p>
+      <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">          
+        <span style="margin-left:65px;">Volumen:</span>         
+        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;background: transparent;">
+      </p>
+      <div>
+        <span style="float:left; margin:-55px 0 0 500px;position:absolute;"><i class="material-icons">volume_down</i></span>
         <div id="master"></div>
-      </p>   
+        <span style="float:left; margin:-55px 0 0 705px;position:absolute;"><i class="material-icons">volume_up</i></span>
+      </div>
     </div> 
     <div class="row timeControl">
       <div class="col">
@@ -243,7 +244,7 @@
 
         $( function() {
           $( "#master" ).slider({
-            value: 60,
+            value: 50,
             orientation: "horizontal",
             range: "min",
             min: 0,
