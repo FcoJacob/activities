@@ -45,6 +45,10 @@
         cursor: pointer;
       }
 
+      #lista li{
+        vertical-align: middle;
+      }
+
       .controls div:hover{        
         border: 3px solid #fff;
         background: rgb(90, 90, 90);
@@ -136,12 +140,16 @@
           return minutes + ":" + seconds;
         }
 
-        $('#lista').on('click', 'li', function(){
+        var audio = document.getElementById("audio");
+
+        $('#lista').on('click', 'li', function(){ 
+          $('#lista li .material-icons').remove();
+          $(this).append("<i class='material-icons'>play_arrow</i>");                
           url = $(this).attr('alt');
           $("#audio").attr("src", "./audio/"+url);
-        });
+          audio.play();
+        });        
         
-        var audio = document.getElementById("audio");
         $('.controls').on('click', 'div', function(){
           accion = $(this).attr('class');                   
           switch(accion){
