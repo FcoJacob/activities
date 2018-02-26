@@ -118,31 +118,91 @@
         }
 
         $('#lista').on('click', 'li', function(){
-          url = $(this).attr("alt");
+          url = $(this).attr('alt');
           $("#audio").attr("src", "./audio/"+url);
         });
-
-        var audio = document.getElementById("audio");
-        $(".play").click(function(){                   
-          audio.play(); 
-          document.getElementById('tiempoTotal').innerHTML = formatTime(audio.duration);
-          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);        
-        });        
-
-        $(".pause").click(function(){                   
-          audio.pause();
-          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
-        });
         
-        $(".backward").click(function(){                   
-          audio.currentTime -= 10;
-          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
-        });
-
-        $(".fordward").click(function(){                   
-          audio.currentTime += 10;
-          document.getElementById('tiempoRestante').innerHTML = formatTime(audio.currentTime);
-        });
+        var audio = document.getElementById("audio");
+        $('.controls').on('click', 'div', function(){
+          accion = $(this).attr('class');                   
+          switch(accion){
+            case 'stop':
+              audio.pause();
+              audio.currentTime = 0;
+              document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime);
+              document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime); 
+              break;
+            case 'backward':
+              audio.currentTime -= 10;
+              document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime);
+              document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime); 
+              break;
+            case 'changedBack':
+              thisAudio = audio.currentSrc;              
+              $('#lista li').each(function(){
+                value = $(this).attr('id');
+                value = '#'+value;
+                songCurrent = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(this).attr('alt');                 
+                if(songCurrent == thisAudio){ //revisar esto  
+                  numeroEnLista = value.substring(8, 9);  
+                  if(numeroEnLista > 1){
+                    numeroEnLista -= 1;
+                    newValue = value.substring(0, 8)+numeroEnLista;                    
+                    cancion = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(newValue).attr('alt');
+                    $("#audio").attr("src", cancion);
+                    audio.play();
+                  }else{
+                    numeroEnLista = 1;
+                    newValue = value.substring(0, 8)+numeroEnLista;                   
+                    cancion = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(newValue).attr('alt');
+                    $("#audio").attr("src", cancion);
+                    audio.play();
+                  } 
+                }
+              });
+              break;
+            case 'pause':
+              audio.pause();
+              document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime);
+              document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime); 
+              break;
+            case 'play':
+              audio.play(); 
+              document.getElementById('tiempoTotal').innerHTML = formatTime(audio.duration);
+              document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime);
+              document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime); 
+              break;
+            case 'changedForward':
+              thisAudio = audio.currentSrc;              
+              $('#lista li').each(function(){
+                value = $(this).attr('id');
+                value = '#'+value;
+                songCurrent = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(this).attr('alt');                 
+                if(songCurrent == thisAudio){ //revisar esto  
+                  numeroEnLista = value.substring(8, 9);  
+                  if(numeroEnLista < 3){
+                    numeroEnLista = parseInt(numeroEnLista)+parseInt(1);
+                    newValue = value.substring(0, 8)+numeroEnLista;                    
+                    cancion = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(newValue).attr('alt');
+                    $("#audio").attr("src", cancion);
+                    audio.play();
+                  }else{
+                    numeroEnLista = 3;
+                    newValue = value.substring(0, 8)+parseInt(numeroEnLista);                    
+                    cancion = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(newValue).attr('alt');
+                    $("#audio").attr("src", cancion);
+                    audio.play();
+                  } 
+                }
+              });
+              break;
+            case 'fordward':
+              audio.currentTime += 10;
+              document.getElementById('tiempoTranscurrido').innerHTML = formatTime(audio.currentTime);
+              document.getElementById('tiempoRestante').innerHTML = formatTime(audio.duration - audio.currentTime); 
+              break;
+          }
+        });        
 
         setInterval(function(){          
           if(audio.ended == true){
