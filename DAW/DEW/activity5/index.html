@@ -46,7 +46,7 @@
       }
 
       #lista li{
-        vertical-align: middle;
+        display: flex;
       }
 
       .controls div:hover{        
@@ -167,6 +167,8 @@
             case 'changedBack':
               thisAudio = audio.currentSrc;              
               $('#lista li').each(function(){
+                $('#lista li .material-icons').remove();
+                $(this).append("<i class='material-icons'>play_arrow</i>"); 
                 value = $(this).attr('id');
                 value = '#'+value;
                 songCurrent = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(this).attr('alt');                 
@@ -202,6 +204,8 @@
             case 'changedForward':
               thisAudio = audio.currentSrc;              
               $('#lista li').each(function(){
+                $('#lista li .material-icons').remove();
+                $(this).append("<i class='material-icons'>play_arrow</i>"); 
                 value = $(this).attr('id');
                 value = '#'+value;
                 songCurrent = "http://localhost/activities/DAW/DEW/activity5/audio/"+$(this).attr('alt');                 
